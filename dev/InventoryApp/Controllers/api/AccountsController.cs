@@ -62,5 +62,23 @@ namespace InventoryApp.Controllers.api
 
             return itemsSaved;
         }
+
+
+        [HttpGet]
+        [Route("api/Accounts/GetBeneficiery")]
+        public Beneficiery GetBeneficiery(string refNo)
+        {
+            var stubBene = new List<Beneficiery>() {
+                new Beneficiery() { Name = "LADUP LEPCHA", Id  = 1005 },
+                new Beneficiery() { Name = "BHAKTA BAHADUR MANGER", Id  = 1005  },
+                new Beneficiery() { Name = "RINGZING LEPCHA", Id  = 1005  },
+                };
+
+            return stubBene.FirstOrDefault(b => b.Name == refNo);
+        }
+
     }
-}
+
+    }
+
+

@@ -11,6 +11,7 @@ namespace Accounts.Repository
     {
         private AccountsContext context = new AccountsContext();
         private GenericRepository<RawMaterials> rawMaterialRepository;
+        private GenericRepository<Beneficiery> beneficieryRepository;
         private GenericRepository<MaterialDistribution> materialDistribution;
         //  private GenericRepository<User> userRepository;
         //  private GenericRepository<UserCar> userCarRepository;
@@ -21,6 +22,14 @@ namespace Accounts.Repository
             get
             {
                 return this.rawMaterialRepository ?? new GenericRepository<RawMaterials>(context);
+            }
+        }
+
+        public GenericRepository<Beneficiery> Beneficiery
+        {
+            get
+            {
+                return this.beneficieryRepository ?? new GenericRepository<Beneficiery>(context);
             }
         }
 

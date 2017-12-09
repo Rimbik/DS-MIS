@@ -186,12 +186,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\api\AccountsController.cs" />
+    <Compile Include="Controllers\BeneficieryController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\UserInventoryController.cs" />
+    <Compile Include="Controllers\BeneficieryManagement.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -267,6 +268,7 @@
     <Content Include="Views\Home\Index1.cshtml" />
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\Shared\AppGenericError.cshtml" />
+    <Content Include="Views\Beneficiery\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,6 +19,20 @@ app.service('AccountsService', function ($http) {
         return data;
     };
 
+    this.getBeneficiery = function (refNo) {
+        var base_url = window.location.origin;
+        var url = base_url + "api/Accounts/GetBeneficiery?RefNo='" + refNo + "'";
+        //
+        var req = {
+            method: 'GET',
+            url: url,
+            dataType: 'json'
+        }
+
+        var data = $http(req);
+        return data;
+    };
+
     this.submitRawMaterialDistribution = function (userData) {
         var base_url = window.location.origin;
         var url = base_url + "/api/Accounts/RawMaterialDistribute";
@@ -34,13 +48,13 @@ app.service('AccountsService', function ($http) {
         return data;
     };
 
-    
 });
 
 //Declaring the Controller
 app.controller('AccountsController', function ($scope, AccountsService) {
 
     $scope.isLoading = true;
+    $scope.beneficieryName = true;
     $scope.userName = 'N/A  ';
     $scope.userPassword = "";
     $scope.userDataDetails = {
@@ -71,6 +85,24 @@ app.controller('AccountsController', function ($scope, AccountsService) {
             var result = resp;
             console.log('submitRawMaterialDistribution', resp);
 
+
+            //End
+
+        }, function (err) {
+            $scope.isLoading = false;
+
+            console.log('printing error starts');
+            console.log(err);
+            $scope.Message = "Call-Failed";
+        });
+    }
+
+    $scope.GetBeneficiery = function (refNo) {
+        var promise = AccountsService.getBeneficiery(refNo);
+        promise.then(function (resp) {
+            $scope.isLoading = false;
+            var result = resp;
+            $scope.beneficieryName = resp.data;
 
             //End
 
