@@ -16,7 +16,9 @@ namespace Accounts.Repository
         {
         }
 
-        public DbSet<RawMaterials> Cars { get; set; }
+        public DbSet<RawMaterials> RawMaterials { get; set; }
+        public DbSet<MaterialDistribution> MaterialDistribution { get; set; }
+
         //public DbSet<User> Users { get; set; }
         //public DbSet<UserCar> UserCar { get; set; }
 

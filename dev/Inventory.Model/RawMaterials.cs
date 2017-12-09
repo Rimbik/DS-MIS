@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Accounts.Model
 {
-    public class RawMaterials
+    public class RawMaterials 
     {
         public int ID { get; set; }
         public string MaterialName { get; set; }
     }
+
+   
 }
