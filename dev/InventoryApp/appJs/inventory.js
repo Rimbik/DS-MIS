@@ -19,6 +19,21 @@ app.service('AccountsService', function ($http) {
         return data;
     };
 
+    //api/Accounts/UserRawMaterials
+    this.getDistributionList = function () {
+        var base_url = window.location.origin;
+        var url = base_url + "/api/Accounts/UserRawMaterials";
+        //
+        var req = {
+            method: 'GET',
+            url: url,
+            dataType: 'json'
+        }
+
+        var data = $http(req);
+        return data;
+    };
+
     this.getBeneficiery = function (refNo) {
         var base_url = window.location.origin;
         var url = base_url + "/api/Accounts/GetBeneficiery/"+refNo;
@@ -61,12 +76,13 @@ app.controller('AccountsController', function ($scope, AccountsService) {
     $scope.gpu = '';
     $scope.distance = '';
     $scope.DistributionNumber = '';
+    $scope.DistributionList = null;
 
     $scope.userName = 'N/A  ';
     $scope.userPassword = "";
     $scope.beneficieryDetails = "";
     $scope.userDataDetails = {
-        AllotmentNumer: 0,
+        AllotementNumber: 0,
         DistributionNumber: 0,
         FormData: null
     };
@@ -79,7 +95,7 @@ app.controller('AccountsController', function ($scope, AccountsService) {
     $scope.ProcessMatDistribution = function () {
         var data = ($scope.RawMaterials);
         $scope.userMaterialForm = {
-            AllotmentNumer: $scope.allotementNumber,
+            AllotementNumber: $scope.allotementNumber,
             DistributionNumber: 0,
             UserMaterial: data
         }
@@ -165,6 +181,27 @@ app.controller('AccountsController', function ($scope, AccountsService) {
             console.log('printing error (GetUserCar) end');
             $scope.Message = "Call-Failed";
             });
+    }
+
+    $scope.GetDistributionList = function () {
+        var promise = AccountsService.getDistributionList();
+        promise.then(function (resp) {
+            $scope.isLoading = false;
+
+            var result = resp;
+            console.log('Response :', result);
+            $scope.DistributionList = resp.data;
+
+            //End
+
+        }, function (err) {
+            $scope.isLoading = false;
+
+            console.log('printing error starts');
+            console.log(err);
+            console.log('printing error (GetUserCar) end');
+            $scope.Message = "Call-Failed";
+        });
     }
 });
 

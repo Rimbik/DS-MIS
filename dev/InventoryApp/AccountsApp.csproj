@@ -269,6 +269,7 @@
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\Shared\AppGenericError.cshtml" />
     <Content Include="Views\Beneficiery\Index.cshtml" />
+    <Content Include="Views\Accounts\MaterialDistributionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

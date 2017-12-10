@@ -15,5 +15,11 @@ namespace AccountsApp.Controllers
         {
             return View();
         }
+
+        // GET: Inventory
+        public ActionResult MaterialDistributionList()
+        {
+            return View();
+        }
     }
 }
