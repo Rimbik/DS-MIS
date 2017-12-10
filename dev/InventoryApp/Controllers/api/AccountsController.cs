@@ -35,19 +35,24 @@ namespace InventoryApp.Controllers.api
         //
         [HttpPost]
         [Route("api/Accounts/RawMaterialDistribute")]
-        public int RawMaterialDistribute(UserMaterialForm userMaterialForm)
+        public string RawMaterialDistribute(UserMaterialForm userMaterialForm)
         {
             int itemsSaved = 0;
             MaterialDistribution userMatData = new MaterialDistribution();
-            if(userMaterialForm != null)
+            UnitOfWork uof = new UnitOfWork();
+            string allotemenrRef = "";
+
+            if (userMaterialForm != null)
             {
-                UnitOfWork uof = new UnitOfWork();
+                allotemenrRef = string.Format("{0}/{1}", userMaterialForm.AllotementNumber, DateTime.Today.Date.ToShortDateString());
+
                 foreach (var data in userMaterialForm.UserMaterial)
                 {
                     userMatData = new MaterialDistribution();
 
-                    userMatData.UserId = userMaterialForm.UserId;
-                    userMatData.ID = data.ID;
+                    userMatData.DistributionNumber = allotemenrRef;
+                    userMatData.AllotementNumber = userMaterialForm.AllotementNumber;
+                    //
                     userMatData.Quantity = data.Quantity;
                     userMatData.Rate = data.Rate;
                     userMatData.Unit = data.Unit;
@@ -60,21 +65,24 @@ namespace InventoryApp.Controllers.api
                 uof.Save();
             }
 
-            return itemsSaved;
+            return allotemenrRef;
         }
 
 
         [HttpGet]
-        [Route("api/Accounts/GetBeneficiery")]
+        [Route("api/Accounts/GetBeneficiery/{refNo}")]
         public Beneficiery GetBeneficiery(string refNo)
         {
             var stubBene = new List<Beneficiery>() {
-                new Beneficiery() { Name = "LADUP LEPCHA", Id  = 1005 },
-                new Beneficiery() { Name = "BHAKTA BAHADUR MANGER", Id  = 1005  },
-                new Beneficiery() { Name = "RINGZING LEPCHA", Id  = 1005  },
+                new Beneficiery() { Name = "LADUP LEPCHA", Id  = 1003, AllotementNumber = "Alt1003", Constituency = "Cons for Alt1003", GPU = "GPU for Alt1003", Distance= "DIS For Alt1003"},
+                new Beneficiery() { Name = "BHAKTA BAHADUR MANGER", Id  = 1004, AllotementNumber = "Alt1004",  Constituency = "Cons for Alt1004", GPU = "GPU for Alt1004", Distance= "DIS For Alt1004"},
+                new Beneficiery() { Name = "RINGZING LEPCHA", Id  = 1005, AllotementNumber = "Alt1005",Constituency = "Cons for Alt1005", GPU = "GPU for Alt1005", Distance= "DIS For Alt1005"},
+                new Beneficiery() { Name = "BHAKTA BAHADUR MANGER", Id  = 1002, AllotementNumber = "02/CMRHM/W/RMDD/GYL", Constituency = "Demo Cons...", GPU ="KARJEE MANGNAM"  },
+
+
                 };
 
-            return stubBene.FirstOrDefault(b => b.Name == refNo);
+            return stubBene.FirstOrDefault(b => b.AllotementNumber == refNo  || b.Name == refNo);
         }
 
     }

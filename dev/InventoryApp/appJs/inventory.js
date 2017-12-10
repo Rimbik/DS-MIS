@@ -21,7 +21,7 @@ app.service('AccountsService', function ($http) {
 
     this.getBeneficiery = function (refNo) {
         var base_url = window.location.origin;
-        var url = base_url + "api/Accounts/GetBeneficiery?RefNo='" + refNo + "'";
+        var url = base_url + "/api/Accounts/GetBeneficiery/"+refNo;
         //
         var req = {
             method: 'GET',
@@ -54,11 +54,20 @@ app.service('AccountsService', function ($http) {
 app.controller('AccountsController', function ($scope, AccountsService) {
 
     $scope.isLoading = true;
-    $scope.beneficieryName = true;
+    $scope.beneficieryName = '';
+    
+    $scope.allotementNumber = '';
+    $scope.constituency = '';
+    $scope.gpu = '';
+    $scope.distance = '';
+    $scope.DistributionNumber = '';
+
     $scope.userName = 'N/A  ';
     $scope.userPassword = "";
+    $scope.beneficieryDetails = "";
     $scope.userDataDetails = {
-        UserId: 0,
+        AllotmentNumer: 0,
+        DistributionNumber: 0,
         FormData: null
     };
 
@@ -70,7 +79,8 @@ app.controller('AccountsController', function ($scope, AccountsService) {
     $scope.ProcessMatDistribution = function () {
         var data = ($scope.RawMaterials);
         $scope.userMaterialForm = {
-            UserId: 1,
+            AllotmentNumer: $scope.allotementNumber,
+            DistributionNumber: 0,
             UserMaterial: data
         }
 
@@ -85,7 +95,7 @@ app.controller('AccountsController', function ($scope, AccountsService) {
             var result = resp;
             console.log('submitRawMaterialDistribution', resp);
 
-
+            $scope.DistributionNumber = resp.data;
             //End
 
         }, function (err) {
@@ -102,10 +112,22 @@ app.controller('AccountsController', function ($scope, AccountsService) {
         promise.then(function (resp) {
             $scope.isLoading = false;
             var result = resp;
-            $scope.beneficieryName = resp.data;
+            if(resp){
+                $scope.beneficieryDetails = resp.data.AllotementNumber + '/' + resp.data.Name;
+                $scope.beneficieryName = resp.data.Name;
+                $scope.allotementNumber = resp.data.AllotementNumber;
+
+                $scope.constituency = resp.data.Constituency;
+                $scope.gpu = resp.data.GPU;
+                $scope.distance = resp.data.Distance;
+            }
+            else {
+                $scope.beneficieryDetails = '';
+                $scope.beneficieryName = '';
+                $scope.allotementNumber = '';
+            }
 
             //End
-
         }, function (err) {
             $scope.isLoading = false;
 

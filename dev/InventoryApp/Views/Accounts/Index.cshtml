@@ -26,13 +26,13 @@
         </div>
     </div>
     <div class="container body-content">
-        <h5> Welcome : {{userName}}</h5>
+        <h5> Welcome : {{userName}}</h5> 
         <hr />
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <h3>
-                       User Material Distrubution
+                       User Material Distrubution , Dist> {{DistributionNumber}}
                     </h3>
                     <form novalidate ng-submit=""  role="form" class="form-inline" >
                         <div class="row">
@@ -48,31 +48,34 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Constituency Number</label>
-                                    <input class="form-control" id="Constituency" placeholder="Constituency" type="text">
+                                    <input class="form-control" id="Constituency" placeholder="Constituency" type="text" ng-model="constituency">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Allotement No</label>
-                                    <input class="form-control" id="exampleInputPassword1" placeholder="Allotement" type="text">
+                                    <input class="form-control" id="exampleInputPassword1" placeholder="Allotement" type="text" ng-model="allotementNumber">
+                                    <button class="btn btn-default" ng-click="GetBeneficiery(allotementNumber)">
+                                        Validate 
+                                    </button>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Distance</label>
-                                    <input class="form-control" id="distance" placeholder="distance" type="text">
+                                    <input class="form-control" id="distance" placeholder="distance" type="text" ng-model="distance">
                                 </div>
                                 </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Beneficiery Details</label>
-                                    <p>{{userName}}</p>
+                                    <p>{{beneficieryDetails}}</p>
                                 </div>
                                 </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">GPU</label>
-                                    <input class="form-control" id="gpu" placeholder="GPU" type="text">
+                                    <input class="form-control" id="gpu" placeholder="GPU" type="text" ng-model="gpu">
                                 </div>
                             </div>
 

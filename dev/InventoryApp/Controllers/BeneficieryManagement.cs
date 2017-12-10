@@ -30,7 +30,7 @@ namespace AccountsApp.Controllers
         {
             UnitOfWork uof = new UnitOfWork();
             var users = uof.Beneficiery.GetAll();
-            var data = users.FirstOrDefault(u => u.Allotementnumber == allotementNumber);
+            var data = users.FirstOrDefault(u => u.AllotementNumber == allotementNumber);
 
             return data;
         }

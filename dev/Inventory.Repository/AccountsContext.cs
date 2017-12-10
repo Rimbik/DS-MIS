@@ -17,7 +17,7 @@ namespace Accounts.Repository
         }
 
         public DbSet<RawMaterials> RawMaterials { get; set; }
-        public DbSet<Beneficiery> Beneficiery { get; set; }
+        //public DbSet<Beneficiery> Beneficiery { get; set; }
         public DbSet<MaterialDistribution> MaterialDistribution { get; set; }
 
         //public DbSet<User> Users { get; set; }
