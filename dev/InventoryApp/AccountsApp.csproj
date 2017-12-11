@@ -270,6 +270,7 @@
     <Content Include="Views\Shared\AppGenericError.cshtml" />
     <Content Include="Views\Beneficiery\Index.cshtml" />
     <Content Include="Views\Accounts\MaterialDistributionList.cshtml" />
+    <Content Include="v2.7z" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
