@@ -267,6 +267,7 @@
     <Content Include="Views\Home\Index1.cshtml" />
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\Shared\AppGenericError.cshtml" />
+    <Content Include="v2.7z" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
