@@ -1,0 +1,100 @@
+﻿
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+</head>
+<div ng-app="AccountsApp" ng-controller="AccountsController" ng-init="GetDistributionList()">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/">My Accounts</a>
+            </div>
+            <div class="navbar-collapse collapse" style="float:right">
+                <ul class="nav navbar-nav">
+                    <li><a href="~/UserManagement/Index">Beneficiery Management</a></li>
+                    <li><a href="~/Accounts/MaterialDistributionList">Distribution List</a></li>
+                    <li style="float:right"><a href="javascript:void()" ng-click="UserSignOut()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <h5> Welcome : {{userName}}</h5>
+        <hr />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                      Bill Number
+                    </h3>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <section>&nbsp;</section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#
+                                </th>
+                                <th> Distribution Number
+                                </th>
+                                <th>
+                                    Allotment Number
+                                </th>
+                                <th>
+                                    Unit
+                                </th>
+                                <th>
+                                    Quantity
+                                </th>
+                                <th>
+                                    Rate
+                                </th>
+                                <th>
+                                    Remark
+                                </th>
+                                <th>
+                                    Distribution Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="distList in DistributionList">
+                                <td>{{$index+1}}</td>
+                                <td>{{distList.DistributionNumber}}</td>
+                                <td>{{distList.AllotementNumber}}</td>
+                                <td>{{distList.Unit}}</td>
+                                <td>{{distList.Quanitity}}</td>
+                                <td>{{distList.Rate}}</td>
+                                <td>{{distList.Note}}</td>
+                                <td>{{distList.DistributionDate | date : 'MM/dd/yyyy'}}</td>
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/appJs/angular.min.js"></script>
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.js"></script>
+
+<script src="~/appJs/inventory.js"></script>
+<script>
+
+
+</script>
