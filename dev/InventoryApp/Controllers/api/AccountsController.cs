@@ -50,7 +50,7 @@ namespace InventoryApp.Controllers.api
                 {
                     userMatData = new MaterialDistribution();
 
-                    userMatData.DistributionNumber = allotemenrRef;
+                    userMatData.DistributionNumber = userMaterialForm.DistributionNumber;
                     userMatData.AllotementNumber = userMaterialForm.AllotementNumber;
                     //
                     userMatData.Quantity = data.Quantity;
@@ -71,7 +71,7 @@ namespace InventoryApp.Controllers.api
 
         [HttpGet]
         [Route("api/Accounts/GetBeneficiery/{refNo}")]
-        public Beneficiery GetBeneficiery(string refNo)
+        public List<Beneficiery> GetBeneficiery(string refNo)
         {
             var stubBene = new List<Beneficiery>() {
                 new Beneficiery() { Name = "LADUP LEPCHA", Id  = 1003, AllotementNumber = "Alt1003", Constituency = "Cons for Alt1003", GPU = "GPU for Alt1003", Distance= "DIS For Alt1003"},
@@ -82,7 +82,7 @@ namespace InventoryApp.Controllers.api
 
                 };
 
-            return stubBene.FirstOrDefault(b => b.AllotementNumber == refNo  || b.Name == refNo);
+            return stubBene.Where(b => b.Name.ToLower().Contains(refNo.ToLower())).ToList();
         }
 
     }

@@ -68,6 +68,7 @@ app.service('AccountsService', function ($http) {
 //Declaring the Controller
 app.controller('AccountsController', function ($scope, AccountsService) {
 
+    $scope.nameToSearch = "";
     $scope.isLoading = true;
     $scope.beneficieryName = '';
     
@@ -77,6 +78,7 @@ app.controller('AccountsController', function ($scope, AccountsService) {
     $scope.distance = '';
     $scope.DistributionNumber = '';
     $scope.DistributionList = null;
+    $scope.BillNo = 0;
 
     $scope.userName = 'N/A  ';
     $scope.userPassword = "";
@@ -96,7 +98,7 @@ app.controller('AccountsController', function ($scope, AccountsService) {
         var data = ($scope.RawMaterials);
         $scope.userMaterialForm = {
             AllotementNumber: $scope.allotementNumber,
-            DistributionNumber: 0,
+            DistributionNumber: $scope.BillNo,
             UserMaterial: data
         }
 
@@ -123,24 +125,29 @@ app.controller('AccountsController', function ($scope, AccountsService) {
         });
     }
 
+    $scope.BeneficieryFound = null;
     $scope.GetBeneficiery = function (refNo) {
         var promise = AccountsService.getBeneficiery(refNo);
         promise.then(function (resp) {
             $scope.isLoading = false;
             var result = resp;
             if(resp){
-                $scope.beneficieryDetails = resp.data.AllotementNumber + '/' + resp.data.Name;
-                $scope.beneficieryName = resp.data.Name;
-                $scope.allotementNumber = resp.data.AllotementNumber;
+                //$scope.beneficieryDetails = resp.data.AllotementNumber + '/' + resp.data.Name;
+                //$scope.beneficieryName = resp.data.Name;
+                //$scope.allotementNumber = resp.data.AllotementNumber;
 
-                $scope.constituency = resp.data.Constituency;
-                $scope.gpu = resp.data.GPU;
-                $scope.distance = resp.data.Distance;
+                //$scope.constituency = resp.data.Constituency;
+                //$scope.gpu = resp.data.GPU;
+                //$scope.distance = resp.data.Distance;
+                $scope.BeneficieryFound = resp.data;
+                console.log($scope.BeneficieryFound);
             }
             else {
-                $scope.beneficieryDetails = '';
-                $scope.beneficieryName = '';
-                $scope.allotementNumber = '';
+                //$scope.beneficieryDetails = '';
+                //$scope.beneficieryName = '';
+                //$scope.allotementNumber = '';
+                $scope.BeneficieryFound = null;
+                console.log('error');
             }
 
             //End
@@ -152,6 +159,17 @@ app.controller('AccountsController', function ($scope, AccountsService) {
             $scope.Message = "Call-Failed";
         });
     }
+
+    $scope.BeneficierySelected = function (index) {
+        var beneSelected = $scope.BeneficieryFound[index];
+        $scope.beneficieryName = beneSelected.Name;
+        $scope.allotementNumber = beneSelected.AllotementNumber;
+        $scope.allotementNumber = beneSelected.AllotementNumber;
+        $scope.constituency = beneSelected.Constituency;
+        $scope.gpu = beneSelected.GPU;
+    }
+
+    //BeneficierySelected
 
     GetRawMaterials();
 
